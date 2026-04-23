@@ -1,0 +1,19 @@
+class KthLargest:
+    import heapq
+    def __init__(self, k: int, nums: list[int]):
+        self.k = k
+        self.stream = nums
+        heapq.heapify(self.stream)
+        while len(self.stream) > k:
+            heapq.heappop(self.stream)
+
+    def add(self, val: int) -> int:
+        if len(self.stream) < self.k:
+            heapq.heappush(self.stream, val)
+    
+        elif val > self.stream[0]:
+            heapq.heapreplace(self.stream, val)
+        
+        return self.stream[0]
+
+        
